@@ -1,10 +1,10 @@
 
 #include <SharpIR.h>
 
-#define ir1 A0
-#define ir2 A1
-#define ir3 A2
-#define ir4 A3
+#define ir1 A4
+#define ir2 A7
+#define ir3 A5
+#define ir4 A6
 
 #define model 20150
 
