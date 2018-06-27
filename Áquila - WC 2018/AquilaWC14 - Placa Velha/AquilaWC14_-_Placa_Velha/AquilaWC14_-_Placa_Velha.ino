@@ -1,4 +1,3 @@
-
 #include <SharpIR.h>
 
 #define ir1 A4
@@ -64,7 +63,7 @@ void seek() {
 
 //AND
 
-void mainCode(){
+void mainCode(int counter){
   Serial.print("Chamou mainCode");
     if (digitalRead(botao) == LOW) {
     delay(200);
@@ -163,7 +162,14 @@ void mainCode(){
     else if(dis1 >= range1 && dis2 >= range2 && dis3 >= range3 && dis4 >= range4){
       speedleft = 120;
       speedright = 120;
-      findIt();
+      if(counter == 1){
+        findIt();
+        Serial.println("caiu no findIt - counter 1");
+      }
+      else if(counter == 2){
+        findItTheOtherWay();
+        Serial.println("caiu no other way - counter 2");
+      }
     }
     else if (dis3 >= range3 || dis3 < 0) {
         if (dis4 >= range4 || dis4 < 0) {
@@ -217,6 +223,13 @@ void findIt() {
   analogWrite(AIB, speedleft);
   analogWrite(BIA, speedright);
   analogWrite(BIB, 0);
+}
+
+void findItTheOtherWay() {
+  analogWrite(AIA, speedleft);
+  analogWrite(AIB, 0);
+  analogWrite(BIA, 0);
+  analogWrite(BIB, speedright);
 }
 
 void stopp() {
@@ -281,35 +294,39 @@ void loop() {
     
    }
    if(startState == LOW){ //AQUI O ROBÔ DÁ O PLAY
-    if(counter == 1){
+    if(counter == 1){ //DONE
       Serial.print("Estratégia: ");
       Serial.println(counter); 
       //GIRA EM SEU PRÓPRIO EIXO PARA UM LADO
-      mainCode();
+      mainCode(counter);
     }
-    if(counter == 2){
+    if(counter == 2){ //DONE
       Serial.print("Estratégia: ");
       Serial.println(counter); 
-      //GIRA EM SEU PRÓPRIO EIXO PARA OUTRO LADO - Ver como diferenciar da de cima
-      mainCode();
+      //GIRA EM SEU PRÓPRIO EIXO PARA OUTRO LADO 
+      mainCode(counter);
     }
-    if(counter == 3){
+    if(counter == 3){ 
+      //Primeira tentativa: Executar a estratégia até enxergar algo com qualquer um dos sensores
+      //Assim que notar algo, chamará o código padrão e executará sua função corretamente. (Será???)
       Serial.print("Estratégia: ");
       Serial.println(counter); 
       //ANDA PARA TRÁS E VIRA PARA A DIREITA
-      mainCode();
+      mainCode(counter);
     }
     if(counter == 4){
+      //Primeira tentativa: Executar a estratégia até enxergar algo com qualquer um dos sensores (Pro outro lado)
+      //Assim que notar algo, chamará o código padrão e executará sua função corretamente. (Será???)
       Serial.print("Estratégia: ");
       Serial.println(counter); 
       //ANDA PARA TRÁS E VIRA PARA A ESQUERDA
-      mainCode();
+      mainCode(counter);
     }
-    if(counter == 5){
+    if(counter == 5){ //THE HARDEST ONE. STILL DON'T KNOW HOW TO DO IT xD
       Serial.print("Estratégia: ");
       Serial.println(counter); 
       //ESPERA A UMA DISTÂNCIA MAIOR E SÓ MONITORA O OPONENTE. QUANDO ESTIVER MAIS PERTO, ATACA - Ver como será feito
-      mainCode();
+      mainCode(counter);
     }
    }
 }
