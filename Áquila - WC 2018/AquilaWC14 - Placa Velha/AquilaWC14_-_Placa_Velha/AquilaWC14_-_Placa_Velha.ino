@@ -1,9 +1,9 @@
 #include <SharpIR.h>
 
-#define ir1 A4
-#define ir2 A7
-#define ir3 A5
-#define ir4 A6
+#define ir1 A0
+#define ir2 A1
+#define ir3 A2
+#define ir4 A3
 
 #define model 20150
 
@@ -27,6 +27,7 @@ int range4 = 45;
 int botao = A5;
 int botaoSelect = 12;
 int LED = 11;
+int ledcounter = 0;
 
 const int AIA = 9;
 const int AIB = 10;
@@ -162,11 +163,11 @@ void mainCode(int counter){
     else if(dis1 >= range1 && dis2 >= range2 && dis3 >= range3 && dis4 >= range4){
       speedleft = 120;
       speedright = 120;
-      if(counter == 1){
+      if(counter == 1 || counter == 3){
         findIt();
         Serial.println("caiu no findIt - counter 1");
       }
-      else if(counter == 2){
+      else if(counter == 2 || counter == 4){
         findItTheOtherWay();
         Serial.println("caiu no other way - counter 2");
       }

@@ -1,6 +1,6 @@
 #include <SharpIR.h>
 
-#define ir A3
+#define ir A4
 #define model 20150
 
 boolean done=false;

@@ -17,22 +17,8 @@ void setup() {
   pinMode(BIA, OUTPUT);
   pinMode(BIB, OUTPUT);
 }
-int buttonCounter;
 void loop() {
     speed = 100;
-   // forward();
-
-//digitalRead(13); // Leitura do estado do botão
-
-//if (digitalRead (13) == HIGH) // Condição para iniciar ou não a volta
-//{
-//bool buttonState = 1;
-// buttonCounter = buttonCounter + 1;
-//  int countDir = 0;
-//}
-//switch (buttonCounter){ // Quando o botão for apertado seu valor será 1 e o case abaixo será executado
-
-//case 1:
     
   analogWrite(AIA, 0);
   analogWrite(AIB, 255);
