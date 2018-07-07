@@ -37,8 +37,8 @@ void loop() {
   dis = sharp.distance();
   Serial.println(dis);
 if (dis > 13 && dis <= 30) {
-      velocid = 50;
-      backward();
+      velocid = 255;
+      destroy();
     }
     else   {
       velocid = 0;

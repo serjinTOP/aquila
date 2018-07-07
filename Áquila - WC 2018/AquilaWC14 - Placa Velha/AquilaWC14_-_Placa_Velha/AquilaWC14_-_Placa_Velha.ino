@@ -168,6 +168,8 @@ void mainCode(int counter){
         Serial.println("caiu no findIt - counter 1");
       }
       else if(counter == 2 || counter == 4){
+        speedleft = 120;
+        speedright = 120;
         findItTheOtherWay();
         Serial.println("caiu no other way - counter 2");
       }

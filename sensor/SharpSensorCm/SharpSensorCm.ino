@@ -1,11 +1,9 @@
 #include <SharpIR.h>
 
-#define ir A3
+#define ir A0
 #define model 20150
 
 boolean done=false;
-
-
 SharpIR sharp(ir, 25, 93, model);
 
 // ir: the pin where your sensor is attached

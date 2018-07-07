@@ -8,17 +8,17 @@
 //SENSOR FRENTE DIREITA (3): A6
 //SENSOR DIREITA (4): A7
 //MOTOR A: AIB + BIA -> D5
-         //AIA + BIB -> D6
+//AIA + BIB -> D6
 //MOTOR B: AIB + BIA -> D11
 //         AIA + BIB -> D10
 
 
 #include <SharpIR.h>
 
-#define ir1 A4
-#define ir2 A7
-#define ir3 A6
-#define ir4 A5
+#define ir1 A0
+#define ir2 A1
+#define ir3 A2
+#define ir4 A3
 
 #define model 20150
 
@@ -34,10 +34,10 @@ int dis2 = 0;
 int dis3 = 0;
 int dis4 = 0;
 
-int range1 = 45;
-int range2 = 45;
-int range3 = 45;
-int range4 = 45;
+int range1 = 60;
+int range2 = 60;
+int range3 = 60;
+int range4 = 60;
 
 int botao = A5;
 int LED = 11;
@@ -80,6 +80,20 @@ void destroy() {
 void backward() {
   analogWrite(AIA, 0);
   analogWrite(AIB, speedleft);
+  analogWrite(BIA, 0);
+  analogWrite(BIB, speedright);
+}
+
+void findIt() {
+  analogWrite(AIA, 0);
+  analogWrite(AIB, speedleft);
+  analogWrite(BIA, speedright);
+  analogWrite(BIB, 0);
+}
+
+void findItTheOtherWay() {
+  analogWrite(AIA, speedleft);
+  analogWrite(AIB, 0);
   analogWrite(BIA, 0);
   analogWrite(BIB, speedright);
 }
@@ -145,17 +159,17 @@ void loop() {
     }
 
     if (time2 < 100) {
-      
+
       range1 = 60;
       range2 = 60;
       range3 = 50;
       range4 = 50;
     }
     else {
-      range1 = 45;
-      range2 = 45;
-      range3 = 45;
-      range4 = 45;
+      range1 = 60;
+      range2 = 60;
+      range3 = 60;
+      range4 = 60;
     }
 
     pisca = 0;
@@ -218,36 +232,41 @@ void loop() {
         }
       }
     }
-      else if (dis3 >= range3 || dis3 < 0) {
-        if (dis4 >= range4 || dis4 < 0) {
-          if (dis1 >= range1 || dis1 < 0) {
-            if (dis2 >= range2 || dis2 < 0) {
+    else if (dis1 >= range1 && dis2 >= range2 && dis3 >= range3 && dis4 >= range4) {
+      speedleft = 100;
+      speedright = 100;
+      findIt();
+    }
+    else if (dis3 >= range3 || dis3 < 0) {
+      if (dis4 >= range4 || dis4 < 0) {
+        if (dis1 >= range1 || dis1 < 0) {
+          if (dis2 >= range2 || dis2 < 0) {
 
-              if (memoria == 1) {
-                speedleft = 100;
-                speedright = 20;
-                destroy();
-              }
-              if (memoria == -1) {
-                speedleft = 20;
-                speedright = 100;
-                destroy();
-              }
-              if (memoria == 2) {
-                speedleft = 140;
-                speedright = 0;
-                destroy();
-              }
-              if (memoria == -2) {
-                speedleft = 0;
-                speedright = 140;
-                destroy();
-              }
-
+            if (memoria == 1) {
+              speedleft = 100;
+              speedright = 20;
+              destroy();
             }
+            if (memoria == -1) {
+              speedleft = 20;
+              speedright = 100;
+              destroy();
+            }
+            if (memoria == 2) {
+              speedleft = 140;
+              speedright = 0;
+              destroy();
+            }
+            if (memoria == -2) {
+              speedleft = 0;
+              speedright = 140;
+              destroy();
+            }
+
           }
         }
       }
-    }  
+    }
+  }
 }
 
